@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import TeamCard from "../components/cards/TeamCard";
 import { getTeams } from "../services/teamService";
+import { Team } from "../types/Team";
 
 const TeamSelection = () => {
-  const [teams, setTeams] = useState([]);
+  const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [userTeam, setUserTeam] = useState(0);
