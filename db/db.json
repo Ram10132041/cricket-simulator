@@ -1,0 +1,104 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "India",
+      "country": "India",
+      "image": "/images/india.png",
+      "batting": 96,
+      "bowling": 91,
+      "fielding": 94,
+      "overall": 94
+    },
+    {
+      "id": 2,
+      "name": "Australia",
+      "country": "Australia",
+      "image": "/images/australia.png",
+      "batting": 94,
+      "bowling": 95,
+      "fielding": 93,
+      "overall": 94
+    },
+    {
+      "id": 3,
+      "name": "England",
+      "country": "England",
+      "image": "/images/england.png",
+      "batting": 92,
+      "bowling": 89,
+      "fielding": 91,
+      "overall": 91
+    },
+    {
+      "id": 4,
+      "name": "South Africa",
+      "country": "South Africa",
+      "image": "/images/south-africa.png",
+      "batting": 90,
+      "bowling": 92,
+      "fielding": 94,
+      "overall": 92
+    },
+    {
+      "id": 5,
+      "name": "New Zealand",
+      "country": "New Zealand",
+      "image": "/images/new-zealand.png",
+      "batting": 89,
+      "bowling": 91,
+      "fielding": 93,
+      "overall": 91
+    },
+    {
+      "id": 6,
+      "name": "Pakistan",
+      "country": "Pakistan",
+      "image": "/images/pakistan.png",
+      "batting": 88,
+      "bowling": 93,
+      "fielding": 87,
+      "overall": 89
+    },
+    {
+      "id": 7,
+      "name": "Sri Lanka",
+      "country": "Sri Lanka",
+      "image": "/images/sri-lanka.png",
+      "batting": 84,
+      "bowling": 83,
+      "fielding": 85,
+      "overall": 84
+    },
+    {
+      "id": 8,
+      "name": "Afghanistan",
+      "country": "Afghanistan",
+      "image": "/images/afghanistan.png",
+      "batting": 82,
+      "bowling": 89,
+      "fielding": 82,
+      "overall": 84
+    },
+    {
+      "id": 9,
+      "name": "Bangladesh",
+      "country": "Bangladesh",
+      "image": "/images/bangladesh.png",
+      "batting": 81,
+      "bowling": 80,
+      "fielding": 79,
+      "overall": 80
+    },
+    {
+      "id": 10,
+      "name": "West Indies",
+      "country": "West Indies",
+      "image": "/images/west-indies.png",
+      "batting": 86,
+      "bowling": 81,
+      "fielding": 83,
+      "overall": 83
+    }
+  ]
+}
