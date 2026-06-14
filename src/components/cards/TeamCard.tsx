@@ -6,6 +6,9 @@ interface TeamCardProps {
 }
 
 const TeamCard = ({ team, title }: TeamCardProps) => {
+  if (!team) {
+    return null;
+  }
   return (
     <div
       className="
