@@ -3,12 +3,30 @@ import type { Team } from "../../types/Team";
 interface TeamCardProps {
   team: Team;
   title: string;
+  isUserTeam?: boolean;
+  isComputerTeam?: boolean;
 }
 
-const TeamCard = ({ team, title }: TeamCardProps) => {
+const TeamCard = ({
+  team,
+  title,
+  isUserTeam,
+  isComputerTeam,
+}: TeamCardProps) => {
   if (!team) {
     return null;
   }
+  const getStrength = () => {
+    if (team.batting > team.bowling) {
+      return "🏏 Batting Heavy";
+    }
+
+    if (team.batting < team.bowling) {
+      return "🎯 Bowling Heavy";
+    }
+
+    return "⚖️ Balanced Team";
+  };
   return (
     <div
       className="
@@ -31,6 +49,21 @@ const TeamCard = ({ team, title }: TeamCardProps) => {
         <p>🤾 Fielding: {team.fielding}</p>
         <p>⭐ Overall: {team.overall}</p>
       </div>
+      <div className="mt-4 text-center">
+        <span className="px-4 py-2 bg-slate-100 rounded-full">
+          {getStrength()}
+        </span>
+      </div>
+      {isUserTeam ? (
+        <p className="mt-4 text-center text-sm text-gray-500">
+          This is your team. Use the buttons below to change your selection.
+        </p>
+      ) : isComputerTeam ? (
+        <p className="mt-4 text-center text-sm text-gray-500">
+          This is Computers team. Use the buttons below to change your
+          selection.
+        </p>
+      ) : null}
     </div>
   );
 };

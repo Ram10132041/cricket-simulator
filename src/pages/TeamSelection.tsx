@@ -6,6 +6,7 @@ import type { Team } from "../types/Team";
 const TeamSelection = () => {
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectionCount, setSelectionCount] = useState(0);
 
   const [userTeam, setUserTeam] = useState(0);
   const [computersTeam, setComputersTeam] = useState(1);
@@ -31,7 +32,8 @@ const TeamSelection = () => {
     if (next === computersTeam) {
       next = (next + 1) % teams.length;
     }
-
+    setSelectionCount((prev) => prev + 1);
+    console.log("User team selection count:", selectionCount + 1);
     setUserTeam(next);
   };
 
@@ -72,7 +74,11 @@ const TeamSelection = () => {
       <div className="flex justify-center gap-10">
         {/* User Team */}
         <div className="flex flex-col items-center gap-4">
-          <TeamCard title="Your Team" team={teams[userTeam]} />
+          <TeamCard
+            title="Your Team"
+            team={teams[userTeam]}
+            isUserTeam={true}
+          />
 
           <div className="flex gap-3">
             <button
@@ -93,7 +99,11 @@ const TeamSelection = () => {
 
         {/* Computer Team */}
         <div className="flex flex-col items-center gap-4">
-          <TeamCard title="Computer Team" team={teams[computersTeam]} />
+          <TeamCard
+            title="Computer Team"
+            team={teams[computersTeam]}
+            isComputerTeam={true}
+          />
 
           <div className="flex gap-3">
             <button
