@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import TeamCard from "../components/cards/TeamCard";
+import { useGame } from "../context/GameContext";
 import { getTeams } from "../services/teamService";
 import type { Team } from "../types/Team";
 
 const TeamSelection = () => {
+  const { state, dispatch } = useGame();
+  const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectionCount, setSelectionCount] = useState(0);
@@ -14,6 +18,10 @@ const TeamSelection = () => {
   useEffect(() => {
     loadTeams();
   }, []);
+  useEffect(() => {
+    console.log("Game State Updated");
+    console.log(state);
+  }, [state]);
 
   const loadTeams = async () => {
     try {
@@ -33,7 +41,6 @@ const TeamSelection = () => {
       next = (next + 1) % teams.length;
     }
     setSelectionCount((prev) => prev + 1);
-    console.log("User team selection count:", selectionCount + 1);
     setUserTeam(next);
   };
 
@@ -48,9 +55,21 @@ const TeamSelection = () => {
   };
 
   const handleTeamsSelection = () => {
-    console.log("Selected User Team:", teams[userTeam]);
-    console.log("Selected Computer Team:", teams[computersTeam]);
-    // Here you can navigate to the next screen or start the game with the selected teams
+    // dispatch the actual team IDs (teams[userTeam].id) instead of the index
+    dispatch({
+      type: "SET_TEAMS",
+      payload: {
+        userTeamId: teams[userTeam].id,
+        computerTeamId: teams[computersTeam].id,
+      },
+    });
+    console.log(state);
+    console.log(
+      "Dispatched team IDs:",
+      teams[userTeam].id,
+      teams[computersTeam].id,
+    );
+    navigate("/playingxi");
   };
 
   if (loading) {

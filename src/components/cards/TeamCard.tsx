@@ -27,6 +27,7 @@ const TeamCard = ({
 
     return "⚖️ Balanced Team";
   };
+  console.log(`${title} Rendering:`, team.name);
   return (
     <div
       className="
