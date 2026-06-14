@@ -157,6 +157,7 @@ const TeamSelection = () => {
           </div>
         </div>
       </div>
+      <p> Selection Count : {selectionCount}</p>
 
       <button
         onClick={handleTeamsSelection}
