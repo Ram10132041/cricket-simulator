@@ -90,7 +90,7 @@ const TeamSelection = () => {
 
   return (
     <div className="min-h-screen bg-slate-100 flex flex-col justify-center">
-      <div className="flex justify-center gap-10">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-10">
         {/* User Team */}
         <div className="flex flex-col items-center gap-4">
           <TeamCard

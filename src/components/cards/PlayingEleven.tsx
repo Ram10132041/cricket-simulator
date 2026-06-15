@@ -50,7 +50,7 @@ const PlayingEleven = () => {
           Select Playing XI
         </h2>
 
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
           {/* First column: 9 players */}
           <div className="flex-1">
             <div className="space-y-3">
