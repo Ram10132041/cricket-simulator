@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGame } from "../../context/GameContext";
 import { getPlayers } from "../../services/playerService";
 import type { Player } from "../../types/Team";
 
 const PlayingEleven = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useGame();
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<number[]>([]); // Store selected player IDs
@@ -41,6 +43,7 @@ const PlayingEleven = () => {
     // dispatch selected playing XI to context
     dispatch({ type: "SET_PLAYING_XI", payload: selectedPlayers });
     console.log("Submitted playing XI:", selectedPlayers);
+    navigate("/toss");
   };
 
   return (

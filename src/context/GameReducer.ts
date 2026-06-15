@@ -8,17 +8,23 @@ export const gameReducer = (
     case "SET_TEAMS":
       return {
         ...state,
-
         userTeamId: action.payload.userTeamId,
-
         computerTeamId: action.payload.computerTeamId,
       };
 
     case "SET_PLAYING_XI":
       return {
         ...state,
-
         selectedPlayerIds: action.payload,
+      };
+
+    case "SET_TOSS_RESULT":
+      console.log("Reducer received toss result:", action.payload);
+      return {
+        ...state,
+        tossWinner: action.payload.tossWinner,
+        battingTeam: action.payload.battingTeam,
+        bowlingTeam: action.payload.bowlingTeam,
       };
 
     default:

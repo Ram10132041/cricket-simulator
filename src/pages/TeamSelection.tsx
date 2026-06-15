@@ -10,7 +10,7 @@ const TeamSelection = () => {
   const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectionCount, setSelectionCount] = useState(0);
+  const [, setSelectionCount] = useState(0);
 
   const [userTeam, setUserTeam] = useState(0);
   const [computersTeam, setComputersTeam] = useState(1);
@@ -157,7 +157,6 @@ const TeamSelection = () => {
           </div>
         </div>
       </div>
-      <p> Selection Count : {selectionCount}</p>
 
       <button
         onClick={handleTeamsSelection}
