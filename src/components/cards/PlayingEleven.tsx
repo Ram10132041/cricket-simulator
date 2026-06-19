@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useGame } from "../../context/GameContext";
+import { useTheme } from "../../context/ThemeContext";
 import { getPlayers } from "../../services/playerService";
 import type { Player } from "../../types/Team";
 
@@ -9,6 +10,7 @@ const PlayingEleven = () => {
   const { state, dispatch } = useGame();
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<number[]>([]); // Store selected player IDs
+  const { theme } = useTheme();
 
   useEffect(() => {
     loadPlayers();
@@ -46,9 +48,27 @@ const PlayingEleven = () => {
     navigate("/toss");
   };
 
+  const outerClass =
+    theme === "light"
+      ? "min-h-screen flex items-center justify-center bg-slate-50 p-6"
+      : "min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 via-slate-800 to-black p-6";
+
+  const cardClass =
+    theme === "light"
+      ? "w-full max-w-4xl bg-white rounded-2xl shadow-xl p-6 text-slate-900"
+      : "w-full max-w-4xl bg-slate-800 rounded-2xl shadow-xl p-6 text-slate-100 border border-slate-700";
+
+  const roleTextClass =
+    theme === "light" ? "text-sm text-gray-500" : "text-sm text-slate-300";
+
+  const playerItemClass =
+    theme === "light"
+      ? "flex items-center justify-between border p-3 rounded-lg"
+      : "flex items-center justify-between border border-slate-700 p-3 rounded-lg bg-slate-900/40";
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6 ">
-      <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-6">
+    <div className={outerClass}>
+      <div className={cardClass}>
         <h2 className="text-2xl font-bold text-center mb-6">
           Select Playing XI
         </h2>
@@ -58,10 +78,7 @@ const PlayingEleven = () => {
           <div className="flex-1">
             <div className="space-y-3">
               {firstColumn.map((player) => (
-                <div
-                  key={player.id}
-                  className="flex items-center justify-between border p-3 rounded-lg"
-                >
+                <div key={player.id} className={playerItemClass}>
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="checkbox"
@@ -71,7 +88,7 @@ const PlayingEleven = () => {
                     />
                     <span className="font-medium">{player.name}</span>
                   </label>
-                  <span className="text-sm text-gray-500">{player.role}</span>
+                  <span className={roleTextClass}>{player.role}</span>
                 </div>
               ))}
             </div>
@@ -81,10 +98,7 @@ const PlayingEleven = () => {
           <div className="flex-1 flex flex-col justify-between">
             <div className="space-y-3">
               {secondColumn.map((player) => (
-                <div
-                  key={player.id}
-                  className="flex items-center justify-between border p-3 rounded-lg"
-                >
+                <div key={player.id} className={playerItemClass}>
                   <label className="flex items-center gap-3 cursor-pointer">
                     <input
                       type="checkbox"
@@ -94,7 +108,7 @@ const PlayingEleven = () => {
                     />
                     <span className="font-medium">{player.name}</span>
                   </label>
-                  <span className="text-sm text-gray-500">{player.role}</span>
+                  <span className={roleTextClass}>{player.role}</span>
                 </div>
               ))}
             </div>

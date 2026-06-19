@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useGame } from "../../context/GameContext";
+import { useTheme } from "../../context/ThemeContext";
 import { getTeams } from "../../services/teamService";
 import type { Team } from "../../types/Team";
 const Toss = () => {
   const { dispatch, state } = useGame();
+  const { theme } = useTheme();
   const [teams, setTeams] = useState<Team[]>([]);
   const [showChoices, setShowChoices] = useState(false);
   const [userChoice, setUserChoice] = useState("");
@@ -97,14 +99,47 @@ const Toss = () => {
   };
   const battingTeamObj = teams.find((team) => team.id === state.battingTeamId);
   const bowlingTeamObj = teams.find((team) => team.id === state.bowlingTeamId);
+
+  const outerClass =
+    theme === "light"
+      ? "min-h-screen flex items-center justify-center bg-slate-100 p-4 sm:p-6"
+      : "min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 via-slate-800 to-black p-4 sm:p-6 text-slate-100";
+
+  const mainClass =
+    theme === "light"
+      ? "w-full max-w-md bg-white rounded-2xl shadow-xl p-6 text-slate-900"
+      : "w-full max-w-md bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-700 text-slate-100";
+
+  const panelClass =
+    theme === "light"
+      ? "mt-6 bg-slate-50 p-4 rounded-lg text-center"
+      : "mt-6 bg-slate-900/60 p-4 rounded-lg text-center";
+
+  // const buttonBase = "w-full py-4 rounded-xl text-lg font-bold";
+
+  const headsClass =
+    theme === "light"
+      ? "w-full md:w-1/2 py-4 bg-blue-500 text-white rounded-xl text-lg"
+      : "w-full md:w-1/2 py-4 bg-blue-600 text-white rounded-xl text-lg";
+
+  const tailsClass =
+    theme === "light"
+      ? "w-full md:w-1/2 py-4 bg-green-500 text-white rounded-xl text-lg"
+      : "w-full md:w-1/2 py-4 bg-green-600 text-white rounded-xl text-lg";
+
+  const primaryBtnClass =
+    theme === "light"
+      ? "w-full py-4 bg-yellow-500 text-white rounded-xl shadow-xl text-lg font-bold"
+      : "w-full py-4 bg-yellow-500 text-slate-900 rounded-xl shadow-xl text-lg font-bold";
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4 sm:p-6">
-      <main className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6">
+    <div className={outerClass}>
+      <main className={mainClass}>
         {!showChoices && (
           <div className="w-full">
             <button
               onClick={handleTossClick}
-              className="w-full py-4 bg-yellow-500 text-white rounded-xl shadow-xl text-lg font-bold"
+              className={primaryBtnClass}
               aria-label="Start Toss"
             >
               Toss Time
@@ -116,7 +151,7 @@ const Toss = () => {
           <div className="flex flex-col md:flex-row gap-4 w-full">
             <button
               onClick={() => handleChoice("HEADS")}
-              className="w-full md:w-1/2 py-4 bg-blue-500 text-white rounded-xl text-lg"
+              className={headsClass}
               aria-pressed={userChoice === "HEADS"}
               aria-label="Choose Heads"
             >
@@ -125,7 +160,7 @@ const Toss = () => {
 
             <button
               onClick={() => handleChoice("TAILS")}
-              className="w-full md:w-1/2 py-4 bg-green-500 text-white rounded-xl text-lg"
+              className={tailsClass}
               aria-pressed={userChoice === "TAILS"}
               aria-label="Choose Tails"
             >
@@ -135,7 +170,7 @@ const Toss = () => {
         )}
 
         {coinResult && !decisionMade && (
-          <div className="mt-6 bg-slate-50 p-4 rounded-lg text-center">
+          <div className={panelClass}>
             <h2 className="text-lg font-medium">You Chose: {userChoice}</h2>
             <p className="mt-2">
               Coin Result: <strong>{coinResult}</strong>
@@ -150,14 +185,22 @@ const Toss = () => {
           <div className=" mt-6 w-full max-w-sm flex flex-col gap-4 ">
             <button
               onClick={() => handleDecision("BAT")}
-              className=" w-full py-4 bg-blue-600 text-white rounded-xl shadow-lg font-semibold"
+              className={
+                theme === "light"
+                  ? " w-full py-4 bg-blue-600 text-white rounded-xl shadow-lg font-semibold"
+                  : " w-full py-4 bg-blue-600 text-white rounded-xl shadow-lg font-semibold"
+              }
             >
               Bat First
             </button>
 
             <button
               onClick={() => handleDecision("BOWL")}
-              className=" w-full py-4 bg-green-600 text-white rounded-xl shadow-lg font-semibold"
+              className={
+                theme === "light"
+                  ? " w-full py-4 bg-green-600 text-white rounded-xl shadow-lg font-semibold"
+                  : " w-full py-4 bg-green-600 text-white rounded-xl shadow-lg font-semibold"
+              }
             >
               Bowl First
             </button>
@@ -169,7 +212,13 @@ const Toss = () => {
           </div>
         )}
         {battingTeam && (
-          <div className=" mt-6 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6">
+          <div
+            className={
+              theme === "light"
+                ? " mt-6 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6"
+                : " mt-6 w-full max-w-sm bg-slate-800 rounded-2xl shadow-xl p-6 border border-slate-700 text-slate-100"
+            }
+          >
             <h3 className=" text-lg font-bold mb-2">Match Setup</h3>
             <p>Batting Team: {battingTeamObj?.name}</p>
             <p>Bowling Team: {bowlingTeamObj?.name}</p>
