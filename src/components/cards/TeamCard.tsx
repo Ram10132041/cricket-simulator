@@ -29,17 +29,7 @@ const TeamCard = ({
   };
   console.log(`${title} Rendering:`, team.name);
   return (
-    <div
-      className="
-        bg-white
-        rounded-2xl
-        shadow-2xl
-        p-6
-        w-full
-        max-w-md
-        md:w-[400px]
-      "
-    >
+    <div className=" bg-white rounded-2xl shadow-lg border border-slate-200 p-5">
       <h2 className="text-center text-xl font-bold mb-4">{title}</h2>
 
       <img

@@ -102,14 +102,30 @@ const TeamSelection = () => {
           <div className="flex gap-3">
             <button
               onClick={handleUserPrev}
-              className="px-4 py-2 bg-gray-700 text-white rounded"
+              className="px-4
+    py-2
+    rounded-lg
+    bg-blue-600
+    text-white
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-xl"
             >
               ◀ Previous
             </button>
 
             <button
               onClick={handleUserNext}
-              className="px-4 py-2 bg-gray-700 text-white rounded"
+              className="px-4
+    py-2
+    rounded-lg
+    bg-blue-600
+    text-white
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-xl"
             >
               Next ▶
             </button>
@@ -135,7 +151,15 @@ const TeamSelection = () => {
 
                 setComputersTeam(prev);
               }}
-              className="px-4 py-2 bg-gray-700 text-white rounded"
+              className="px-4
+    py-2
+    rounded-lg
+    bg-blue-600
+    text-white
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-xl"
             >
               ◀ Previous
             </button>
@@ -150,7 +174,15 @@ const TeamSelection = () => {
 
                 setComputersTeam(next);
               }}
-              className="px-4 py-2 bg-gray-700 text-white rounded"
+              className="px-4
+    py-2
+    rounded-lg
+    bg-blue-600
+    text-white
+    transition-all
+    duration-300
+    hover:scale-105
+    hover:shadow-xl"
             >
               Next ▶
             </button>

@@ -23,8 +23,8 @@ export const gameReducer = (
       return {
         ...state,
         tossWinner: action.payload.tossWinner,
-        battingTeam: action.payload.battingTeam,
-        bowlingTeam: action.payload.bowlingTeam,
+        battingTeamId: action.payload.battingTeamId,
+        bowlingTeamId: action.payload.bowlingTeamId,
       };
 
     default:

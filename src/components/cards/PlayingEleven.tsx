@@ -47,7 +47,7 @@ const PlayingEleven = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-6 ">
       <div className="w-full max-w-4xl bg-white rounded-2xl shadow-xl p-6">
         <h2 className="text-2xl font-bold text-center mb-6">
           Select Playing XI

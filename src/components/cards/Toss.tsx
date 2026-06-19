@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useGame } from "../../context/GameContext";
+import { getTeams } from "../../services/teamService";
+import type { Team } from "../../types/Team";
 const Toss = () => {
   const { dispatch, state } = useGame();
+  const [teams, setTeams] = useState<Team[]>([]);
   const [showChoices, setShowChoices] = useState(false);
   const [userChoice, setUserChoice] = useState("");
   const [coinResult, setCoinResult] = useState("");
@@ -9,19 +12,33 @@ const Toss = () => {
   const [showDecision, setShowDecision] = useState(false);
   const [computerDecision, setComputerDecision] = useState("");
   const [battingTeam, setBattingTeam] = useState("");
-  const [bowlingTeam, setBowlingTeam] = useState("");
+  const [, setBowlingTeam] = useState("");
   const [tossCompleted, setTossCompleted] = useState(false);
   const [decisionMade, setDecisionMade] = useState(false);
   useEffect(() => {
     console.log("Updated Context State");
     console.log(state);
   }, [state]);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await getTeams();
+        setTeams(data);
+      } catch (err) {
+        console.error("Failed to load teams in Toss:", err);
+      }
+    };
+
+    load();
+  }, []);
+
   const handleTossClick = () => {
     setShowChoices(true);
   };
   const handleChoice = (choice: "HEADS" | "TAILS") => {
     setUserChoice(choice);
-    const result = Math.random() < 0.5 ? "HEADS" : "TAILS";
+    const result = Math.random() < 0.95 ? "HEADS" : "TAILS";
     setCoinResult(result);
     setTossCompleted(true);
     if (choice === result) {
@@ -39,17 +56,23 @@ const Toss = () => {
         setBowlingTeam("COMPUTER");
       }
       setDecisionMade(true);
+      if (state.userTeamId === null || state.computerTeamId === null) {
+        return;
+      }
       dispatch({
         type: "SET_TOSS_RESULT",
         payload: {
           tossWinner: "COMPUTER",
-          battingTeam: decision === "BAT" ? "COMPUTER" : "USER",
-          bowlingTeam: decision === "BAT" ? "USER" : "COMPUTER",
+          battingTeamId:
+            decision === "BAT" ? state.computerTeamId : state.userTeamId,
+          bowlingTeamId:
+            decision === "BAT" ? state.userTeamId : state.computerTeamId,
         },
       });
     }
   };
   const handleDecision = (decision: "BAT" | "BOWL") => {
+    console.log("USER TEAM ID:", state.userTeamId);
     if (decision === "BAT") {
       setBattingTeam("USER");
       setBowlingTeam("COMPUTER");
@@ -58,17 +81,22 @@ const Toss = () => {
       setBowlingTeam("USER");
     }
     setDecisionMade(true);
+    if (state.userTeamId === null || state.computerTeamId === null) {
+      return;
+    }
     dispatch({
       type: "SET_TOSS_RESULT",
-
       payload: {
         tossWinner: "USER",
-        battingTeam: decision === "BAT" ? "USER" : "COMPUTER",
-        bowlingTeam: decision === "BAT" ? "COMPUTER" : "USER",
+        battingTeamId:
+          decision === "BAT" ? state.userTeamId : state.computerTeamId,
+        bowlingTeamId:
+          decision === "BAT" ? state.computerTeamId : state.userTeamId,
       },
     });
   };
-  console.log(userChoice);
+  const battingTeamObj = teams.find((team) => team.id === state.battingTeamId);
+  const bowlingTeamObj = teams.find((team) => team.id === state.bowlingTeamId);
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-100 p-4 sm:p-6">
       <main className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6">
@@ -143,8 +171,8 @@ const Toss = () => {
         {battingTeam && (
           <div className=" mt-6 w-full max-w-sm bg-white rounded-2xl shadow-xl p-6">
             <h3 className=" text-lg font-bold mb-2">Match Setup</h3>
-            <p>Batting Team: {battingTeam}</p>
-            <p>Bowling Team: {bowlingTeam}</p>
+            <p>Batting Team: {battingTeamObj?.name}</p>
+            <p>Bowling Team: {bowlingTeamObj?.name}</p>
           </div>
         )}
       </main>

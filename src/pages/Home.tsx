@@ -11,16 +11,14 @@ const Home = () => {
       <button
         onClick={handleStart}
         className="
-            px-10 py-5
-            text-2xl font-bold
-            text-white
-            bg-blue-600
-            rounded-2xl
-            shadow-xl
-            hover:bg-blue-700
-            hover:shadow-2xl
-            transition-all
-            duration-300
+            bg-emerald-600
+    text-white
+    px-8
+    py-4
+    rounded-xl
+    transition-all
+    duration-300
+    hover:scale-105
           "
       >
         🚀 Start

@@ -3,8 +3,8 @@ export interface GameState {
   computerTeamId: number | null;
   selectedPlayerIds: number[];
   tossWinner: "USER" | "COMPUTER" | null;
-  battingTeam: "USER" | "COMPUTER" | null;
-  bowlingTeam: "USER" | "COMPUTER" | null;
+  battingTeamId: number | null;
+  bowlingTeamId: number | null;
 }
 
 export const initialState: GameState = {
@@ -12,8 +12,8 @@ export const initialState: GameState = {
   computerTeamId: null,
   selectedPlayerIds: [],
   tossWinner: null,
-  battingTeam: null,
-  bowlingTeam: null,
+  battingTeamId: null,
+  bowlingTeamId: null,
 };
 
 export type GameAction =
@@ -32,7 +32,7 @@ export type GameAction =
       type: "SET_TOSS_RESULT";
       payload: {
         tossWinner: "USER" | "COMPUTER";
-        battingTeam: "USER" | "COMPUTER";
-        bowlingTeam: "USER" | "COMPUTER";
+        battingTeamId: number;
+        bowlingTeamId: number;
       };
     };
