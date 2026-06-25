@@ -4,6 +4,7 @@ import { useGame } from "../../context/GameContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getPlayers } from "../../services/playerService";
 import type { Player } from "../../types/Team";
+import { getBestXI } from "../../utils/teamUtils";
 
 const PlayingEleven = () => {
   const navigate = useNavigate();
@@ -19,6 +20,11 @@ const PlayingEleven = () => {
   const loadPlayers = async () => {
     const data = await getPlayers();
     setPlayers(data);
+    const userTeamPlayers = data.filter(
+      (player) => player.teamId === state.userTeamId,
+    );
+    const bestXI = getBestXI(userTeamPlayers);
+    setSelectedPlayers(bestXI.map((player) => player.id));
   };
 
   const teamPlayers = players.filter(
