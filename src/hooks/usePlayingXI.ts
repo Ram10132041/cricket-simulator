@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGame } from "../context/GameContext";
 import { getPlayers } from "../services/playerService";
 import type { Player } from "../types/Team";
@@ -8,6 +8,19 @@ const usePlayingXI = () => {
   const { state, dispatch } = useGame();
   const [players, setPlayers] = useState<Player[]>([]);
   const [selectedPlayers, setSelectedPlayers] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (state.userTeamId == null) return;
+
+    const userTeamPlayers = players.filter(
+      (player) => player.teamId === state.userTeamId,
+    );
+
+    if (userTeamPlayers.length > 0 && selectedPlayers.length === 0) {
+      const defaultXI = getBestXI(userTeamPlayers).map((player) => player.id);
+      setSelectedPlayers(defaultXI);
+    }
+  }, [players, selectedPlayers.length, state.userTeamId]);
 
   const togglePlayer = (playerId: number) => {
     setSelectedPlayers((prevSelected) => {
@@ -20,17 +33,19 @@ const usePlayingXI = () => {
       return [...prevSelected, playerId];
     });
   };
-  const autoSelectBestXI = (players: Player[]) => {
-    const bestXI = getBestXI(players);
-    setSelectedPlayers(bestXI.map((player) => player.id));
-  };
+
   const loadPlayers = async () => {
     const data = await getPlayers();
     setPlayers(data);
+
     const userTeamPlayers = data.filter(
       (player) => player.teamId === state.userTeamId,
     );
-    autoSelectBestXI(userTeamPlayers);
+
+    if (userTeamPlayers.length > 0 && selectedPlayers.length === 0) {
+      const defaultXI = getBestXI(userTeamPlayers).map((player) => player.id);
+      setSelectedPlayers(defaultXI);
+    }
   };
 
   const submitPlayingXI = () => {
