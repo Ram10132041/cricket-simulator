@@ -41,7 +41,7 @@ const PageLayout = ({ children }: PageLayoutProps) => {
 
       <div className="max-w-5xl mx-auto">
         {/* Stadium / Pitch area to give the feel of a cricket match */}
-        <div className="flex justify-center mb-8">
+        <div className="flex justify-center mb-8 hidden">
           <div className="w-full md:w-3/4 lg:w-2/3">
             <div
               className="rounded-xl shadow-inner overflow-hidden"

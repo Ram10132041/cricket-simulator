@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGame } from "../../context/GameContext";
 import { useTheme } from "../../context/ThemeContext";
 import { getTeams } from "../../services/teamService";
@@ -6,6 +7,7 @@ import type { Team } from "../../types/Team";
 const Toss = () => {
   const { dispatch, state } = useGame();
   const { theme } = useTheme();
+  const navigate = useNavigate();
   const [teams, setTeams] = useState<Team[]>([]);
   const [showChoices, setShowChoices] = useState(false);
   const [userChoice, setUserChoice] = useState("");
@@ -132,6 +134,11 @@ const Toss = () => {
       ? "w-full py-4 bg-yellow-500 text-white rounded-xl shadow-xl text-lg font-bold"
       : "w-full py-4 bg-yellow-500 text-slate-900 rounded-xl shadow-xl text-lg font-bold";
 
+  const previewBtnClass =
+    theme === "light"
+      ? "mt-4 w-full rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-indigo-700"
+      : "mt-4 w-full rounded-xl bg-indigo-500 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-indigo-400";
+
   return (
     <div className={outerClass}>
       <main className={mainClass}>
@@ -222,6 +229,13 @@ const Toss = () => {
             <h3 className=" text-lg font-bold mb-2">Match Setup</h3>
             <p>Batting Team: {battingTeamObj?.name}</p>
             <p>Bowling Team: {bowlingTeamObj?.name}</p>
+            <button
+              type="button"
+              className={previewBtnClass}
+              onClick={() => navigate("/match-preview")}
+            >
+              Playing XI Preview
+            </button>
           </div>
         )}
       </main>
