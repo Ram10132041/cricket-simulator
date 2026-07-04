@@ -7,7 +7,8 @@ import { getPlayers } from "../services/playerService";
 import { getTeams } from "../services/teamService";
 import type { Player, Team } from "../types/Team";
 import { getBestXI } from "../utils/teamUtils";
-import TeamPlayingXI from "./MatchPreview/TeamPlayingXI";
+import PlayingXITabs from "./MatchPreview/PlayingXITabs";
+import StartMatchButton from "./MatchPreview/StartMatchButton";
 
 const MatchPreview = () => {
   const { theme } = useTheme();
@@ -66,8 +67,16 @@ const MatchPreview = () => {
                 battingTeamId={state.battingTeamId}
                 bowlingTeamId={state.bowlingTeamId}
               />
-
               <div className="mt-6 space-y-6">
+                <PlayingXITabs
+                  userTeamName={userTeamName}
+                  computerTeamName={computerTeamName}
+                  userPlayers={userPlayingXI}
+                  computerPlayers={computerPlayingXI}
+                />
+              </div>
+
+              {/* <div className="mt-6 space-y-6">
                 <TeamPlayingXI
                   teamName={userTeamName}
                   players={userPlayingXI}
@@ -77,6 +86,10 @@ const MatchPreview = () => {
                   teamName={computerTeamName}
                   players={computerPlayingXI}
                 />
+              </div> */}
+
+              <div className="mt-6">
+                <StartMatchButton />
               </div>
             </>
           )}
