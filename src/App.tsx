@@ -4,6 +4,7 @@ import Toss from "./components/cards/Toss";
 import PageLayout from "./components/layout/PageLayout";
 import { ThemeProvider } from "./context/ThemeContext";
 import Home from "./pages/Home";
+import Match from "./pages/Match";
 import MatchPreview from "./pages/MatchPreview";
 import TeamSelection from "./pages/TeamSelection";
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/playingxi" element={<PlayingXI />} />
             <Route path="/toss" element={<Toss />} />
             <Route path="/match-preview" element={<MatchPreview />} />
+            <Route path="/match" element={<Match />} />
           </Routes>
         </PageLayout>
       </Router>
