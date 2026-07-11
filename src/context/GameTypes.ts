@@ -1,3 +1,5 @@
+import type { MatchState } from "../types/Match";
+
 export interface GameState {
   userTeamId: number | null;
   computerTeamId: number | null;
@@ -5,6 +7,7 @@ export interface GameState {
   tossWinner: "USER" | "COMPUTER" | null;
   battingTeamId: number | null;
   bowlingTeamId: number | null;
+  match: MatchState | null;
 }
 
 export const initialState: GameState = {
@@ -14,6 +17,7 @@ export const initialState: GameState = {
   tossWinner: null,
   battingTeamId: null,
   bowlingTeamId: null,
+  match: null,
 };
 
 export type GameAction =
@@ -35,4 +39,8 @@ export type GameAction =
         battingTeamId: number;
         bowlingTeamId: number;
       };
+    }
+  | {
+      type: "SET_MATCH";
+      payload: MatchState;
     };

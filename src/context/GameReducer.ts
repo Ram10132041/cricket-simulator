@@ -26,6 +26,11 @@ export const gameReducer = (
         battingTeamId: action.payload.battingTeamId,
         bowlingTeamId: action.payload.bowlingTeamId,
       };
+    case "SET_MATCH":
+      return {
+        ...state,
+        match: action.payload,
+      };
 
     default:
       return state;
