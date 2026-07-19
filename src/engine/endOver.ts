@@ -1,5 +1,17 @@
-import type { MatchPlayer } from "../types/Match";
+import type { MatchState } from "../types/Match";
 
-export function endOver(striker:MatchPlayer,nonStriker:MatchPlayer){
-  return { striker:nonStriker, nonStriker:striker };
+export function endOver(match: MatchState): MatchState {
+  return {
+    ...match,
+
+    striker: {
+      ...match.nonStriker,
+    },
+
+    nonStriker: {
+      ...match.striker,
+    },
+
+    overCompleted: true,
+  };
 }

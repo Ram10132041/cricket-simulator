@@ -75,21 +75,11 @@ const MatchPreview = () => {
                   computerPlayers={computerPlayingXI}
                 />
               </div>
-
-              {/* <div className="mt-6 space-y-6">
-                <TeamPlayingXI
-                  teamName={userTeamName}
-                  players={userPlayingXI}
-                />
-
-                <TeamPlayingXI
-                  teamName={computerTeamName}
-                  players={computerPlayingXI}
-                />
-              </div> */}
-
               <div className="mt-6">
-                <StartMatchButton />
+                <StartMatchButton
+                  battingPlayers={userPlayingXI}
+                  bowlingPlayers={computerPlayingXI}
+                />
               </div>
             </>
           )}

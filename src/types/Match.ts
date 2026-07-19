@@ -14,7 +14,10 @@ export interface MatchBowler {
   balls: number;
   runs: number;
   wickets: number;
+  name: string;
 }
+
+import type { BallResult } from "./Ball";
 
 export interface MatchState {
   innings: 1 | 2;
@@ -24,12 +27,13 @@ export interface MatchState {
   wickets: number;
   overs: number;
   balls: number;
-  battingOrder: number[];
+  battingOrder: MatchPlayer[];
   striker: MatchPlayer;
   nonStriker: MatchPlayer;
   nextBatsmanIndex: number;
   currentBowler: MatchBowler;
-  lastBall: string;
+  lastBall: BallResult | string;
+  overCompleted: boolean;
 }
 
 export interface StrikePair {

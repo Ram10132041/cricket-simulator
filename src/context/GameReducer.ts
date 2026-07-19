@@ -1,3 +1,5 @@
+import { changeBowler } from "../engine/changeBowler";
+import { updateMatch } from "../engine/updateMatch";
 import type { GameAction, GameState } from "./GameTypes";
 
 export const gameReducer = (
@@ -30,6 +32,21 @@ export const gameReducer = (
       return {
         ...state,
         match: action.payload,
+      };
+    case "UPDATE_MATCH":
+      if (!state.match) {
+        return state;
+      }
+
+      return {
+        ...state,
+        match: updateMatch(state.match, action.payload),
+      };
+
+    case "CHANGE_BOWLER":
+      return {
+        ...state,
+        match: state.match ? changeBowler(state.match, action.payload) : null,
       };
 
     default:

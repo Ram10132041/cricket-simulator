@@ -1,6 +1,3 @@
 export function updateBalls(currentBalls: number): number {
-  if (currentBalls === 5) {
-    return 0;
-  }
-  return currentBalls + 1;
+  return currentBalls === 5 ? 0 : currentBalls + 1;
 }

@@ -1,9 +1,16 @@
-export function changeBowler(nextBowlerId: number) {
+import type { MatchPlayer, MatchState } from "../types/Match";
+
+export function changeBowler(
+  match: MatchState,
+  bowler: MatchPlayer,
+): MatchState {
   return {
-    playerId: nextBowlerId,
-    overs: 0,
-    balls: 0,
-    runs: 0,
-    wickets: 0,
+    ...match,
+    currentBowler: {
+      ...bowler,
+      overs: 0,
+      wickets: 0,
+    },
+    overCompleted: false,
   };
 }

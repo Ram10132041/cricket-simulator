@@ -1,7 +1,8 @@
 import { useTheme } from "../../context/ThemeContext";
+import type { BallResult } from "../../types/Ball";
 
 interface LastBallCardProps {
-  result: string;
+  result: BallResult | string;
 }
 const LastBallCard = ({ result }: LastBallCardProps) => {
   const { theme } = useTheme();
